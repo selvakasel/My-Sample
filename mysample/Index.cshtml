@@ -1,0 +1,474 @@
+﻿<link href="../../Content/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"
+    type="text/css" />
+<link href="../../Content/DataTables-1.10.12/media/css/jquery.dataTables.min.css"
+    rel="stylesheet" type="text/css" />
+<script src="../../Content/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="../../Content/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../Content/DataTables-1.10.12/media/js/jquery.dataTables.min.js"
+    type="text/javascript"></script>
+<link href="../../Content/pickadate.js-3.5.6/pickadate.js-3.5.6/lib/compressed/themes/classic.css"
+    rel="stylesheet" type="text/css" />
+<link href="../../Content/pickadate.js-3.5.6/pickadate.js-3.5.6/lib/compressed/themes/classic.date.css"
+    rel="stylesheet" type="text/css" />
+<script src="../../Content/pickadate.js-3.5.6/pickadate.js-3.5.6/lib/compressed/picker.js"
+    type="text/javascript"></script>
+<script src="../../Content/pickadate.js-3.5.6/pickadate.js-3.5.6/lib/compressed/picker.date.js"
+    type="text/javascript"></script>
+<style>
+    .picker__holder
+    {
+        height: 263px;
+        width: 350px;
+    }
+    .picker__select--year
+    {
+        width: 77px;
+        height: 37px;
+    }
+    .picker__select--month
+    {
+        height: 37px;
+        width: 122px;
+    }
+</style>
+<style>
+    .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th
+    {
+        background-color: #dff0d8;
+    }
+    .table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th
+    {
+        background-color: #fcf8e3;
+    }
+</style>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"
+    style="margin-top: 42px; margin-left: 24px;">
+    Modal
+</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Register</h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <br />
+                <input type="hidden" id="id1"  />
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label>
+                            Name</label></div>
+                    <div class="col-sm-8">
+                        <input type="text" id="txtname" class="form-control" />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label>
+                            Dob</label></div>
+                    <div class="col-sm-8">
+                        <input type="text" id="txtdob" class="form-control" />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label>
+                            City</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select style="width: 328px; height: 32px;" id="cityid1">
+                            <option value="Chennai">Chennai</option>
+                            <option value="Trichy">Trichy</option>
+                            <option value="Kovai">Kovai</option>
+                            <option value="Madurai">Madurai</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label>
+                            Gender</label></div>
+                    <div class="col-sm-8">
+                        <input type="radio" id="txtram" name="rds" value="Male" />Male
+                        <input type="radio" id="txtram" name="rds" value="Female" />Female
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label>
+                            Rating</label></div>
+                    <div class="col-sm-8">
+                        <input type="text" id="txtrat" class="form-control" />
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <label>
+                            Status</label></div>
+                    <div class="col-sm-8">
+                        <input type="checkbox" name="stat" id="txtstat" value="1" />Check Me
+                    </div>
+                </div>
+                <br />
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnadd" class="btn btn-success">
+                    Add</button>
+                <button type="button" id="btnsave" class="btn btn-success">
+                    Save</button>
+                <button type="button" id="btnupdate" class="btn btn-primary" >
+                    Save</button>
+                <button type="button" id="btnclear" class="btn btn-danger" data-dismiss="modal">
+                    cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br /><br />
+<div class="col-sm-12">
+    <div class="col-sm-6">
+        <div class="col-sm-12">
+            <table id="tableidadd" class="table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Dob
+                        </th>
+                          <th>
+                            City
+                        </th>
+                        <th>
+                            Gender
+                        </th>
+                        <th>
+                            Rating
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        
+    </div>
+    <div class="col-sm-6">
+        <div class="col-sm-12">
+            <table id="tableid" class="table-striped">
+                <thead>
+                    <tr>
+                    <th>
+                            Id
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Dob
+                        </th>
+                        <th>
+                            City
+                        </th>
+                        <th>
+                            Gender
+                        </th>
+                        <th>
+                            Rating
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#btnupdate").hide();
+
+    $('#txtdob').pickadate({
+        labelMonthNext: 'Go to the next month',
+        labelMonthPrev: 'Go to the previous month',
+        labelMonthSelect: 'Pick a month from the dropdown',
+        labelYearSelect: 'Pick a year from the dropdown',
+        selectMonths: true,
+        selectYears: true,
+        format: 'dd/mm/yyyy'
+    })
+
+    $("#btnsave").click(function () {
+        debugger
+        
+        var a = $("#txtname").val();
+        var b = $("#txtdob").val();
+        var c = $("#cityid1").val();
+        var d = $('input:radio[name=rds]:checked').val();
+        var e = $("#txtrat").val();
+
+        if ($('#txtstat').is(':checked')) {
+            var f = 1;
+        }
+        else {
+            var f = 0;
+        }
+        
+
+
+        $.ajax({
+            url: '../Home/sss',
+            data: { Name: a, Dob: b,City:c, Gender: d, Rating: e, Status: f },
+            type: 'post',
+            success: function (data) {
+                alert("save Successfully");
+                clear();
+               
+                $("#tableid").dataTable().fnDraw();
+                $("#myModal").modal('hide');          
+            }
+        });
+
+    });
+    function clear() {
+        var a = $("#txtname").val("");
+        var b = $("#txtdob").val("");
+        var c = $("#cityid1").val("");
+        var d = $('input:radio[name=rds]:checked').val("");
+        var e = $("#txtrat").val("");
+        var f = $('#txtstat').find('input:checkbox').removeAttr('checked');      
+                   
+    }
+
+
+
+    $("#btnupdate").click(function () {
+        debugger
+        var zz = $("#id1").val();
+        var aa = $("#txtname").val();
+        var bb = $("#txtdob").val();
+        var cc = $("#cityid1").val();
+        var dd = $('input:radio[name=rds]:checked').val();
+        var ee = $("#txtrat").val();
+        if ($('#txtstat').is(':checked')) {
+            var ff = 1;
+        }
+        else {
+            var ff = 0;
+        }
+
+        $.ajax({
+
+            url: '../Home/Update',
+            data: { Upid: zz, Upname: aa, Updob: bb, Upcity: cc, Upgender: dd, Uprating: ee, Upstatus: ff },
+            type: 'post',
+            success: function (data) {
+
+                alert("Update Successfully");
+                clear();
+                $("#myModal").modal('hide');
+                $("#tableid").dataTable().fnDraw();
+            }
+        });
+
+    });
+    function clear() {
+        var a = $("#txtname").val("");
+        var b = $("#txtdob").val("");
+        var c = $("#cityid1").val("");
+        var d = $('input:radio[name=rds]:checked').val("");
+        var e = $("#txtrat").val("");
+        var f = $('#txtstat').find('input:checkbox').removeAttr('checked');
+
+    }
+
+</script>
+<script type="text/javascript">
+
+
+
+    $("#btnadd").click(function () {
+
+        var a = $("#txtname").val();
+        var b = $("#txtdob").val();
+        var c = $("#cityid1").val();
+        var d = $('input:radio[name=rds]:checked').val();
+        var e = $("#txtrat").val();
+
+        if ($('#txtstat').is(':checked')) {
+
+
+            var f = 1;
+        }
+        else {
+            var f = 0;
+        }
+
+        $("#tableidadd").dataTable().fnAddData([a, b, c, d, e, f, '<img src="../../Scripts/icons/cancel.png" />']);
+
+        var a = $("#txtname").val("");
+        var b = $("#txtdob").val("");
+        var c = $("#cityid1").val("");
+        var d = $('input:radio[name=rds]:checked').val("");
+        var e = $("#txtrat").val("");
+        var f = $('#txtstat').find('input:checkbox').removeAttr('checked');
+
+    });
+
+
+
+
+
+    $("#tableidadd").dataTable({
+
+
+        "sAjaxSource": '//',
+        "aoColumns": [
+
+{}, {}, {}, {}, {}, {}, {}
+
+
+
+]
+
+    });
+
+
+   
+
+
+</script>
+<script type="text/javascript">
+
+    $("#tableid").dataTable({
+
+
+//        "bServerSide": true,
+//        "bDestroy": true,
+        "sAjaxSource": '/Home/main',
+        "aoColumns": [
+
+                { "sName": "" },
+                { "sName": "" },
+                { "sName": "" },
+                { "sName": "" },
+                { "sName": "" },
+                { "sName": " " },
+                { "sName": " " },
+                { "sName": " " },
+                { "sName": " " }
+    ]
+
+    });
+
+
+
+
+
+
+    $("#tableid").delegate(".edit", "click", function () {
+
+        var Row = $(this).parents('tr')[0];
+        var Maintable = $('#tableid').dataTable();
+        var iPos = Maintable.fnGetPosition(Row);
+        var aData = Maintable.fnGetData(iPos);
+        $("#myModal").modal('show');
+
+        $("#btnadd").hide();
+        $("#btnsave").hide();
+        $("#btnupdate").show();
+
+        if (iPos != null) {
+
+            var s = aData[0];
+            var sa = aData[1];
+            var sa1 = aData[2];
+            var sa2 = aData[3];
+            var sa3 = aData[4];
+            var sa4 = aData[5];
+            var sa5 = aData[6];
+
+            $("#id1").val(s);
+            $("#txtname").val(sa);
+            $("#txtdob").val(sa1);
+            $("#cityid1").val(sa2);
+            $('input:radio[name=rds]:checked').val(sa3);
+            $("#txtrat").val(sa4);
+            $("#txtstat").val(sa5);
+        }
+       
+    });
+
+    $("#tableid").delegate(".dele", "click", function () {
+        debugger;
+
+        var Row = $(this).parents('tr')[0];
+        var Maintable = $('#tableid').dataTable();
+        var iPos = Maintable.fnGetPosition(Row);
+        var aData = Maintable.fnGetData(iPos);
+
+        if (iPos != null) {
+
+
+            var sa = aData[0];
+            var sa1 = aData[1];
+            var sa2 = aData[2];
+            var sa3 = aData[3];
+            var sa4 = aData[4];
+            var sa5 = aData[5];
+            var sa6 = aData[6];
+
+
+            $("#id1").val(sa);
+            $("#txtname").val(sa1);
+            $("#txtdob").val(sa2);
+            $("#cityid1").val(sa3);
+            $('input:radio[name=rds]:checked').val(sa4);
+            $("#txtrat").val(sa5);
+            $("#txtstat").val(sa6);
+
+
+            $.ajax({
+                url: '../Home/Delete',
+                type: 'POST',
+                data: { Deleteid: sa },
+                success: function (data) {
+                    alert('delete Successfully');
+                    $('#tableid').dataTable().fnDraw();
+                }
+            });
+
+        }
+    });
+
+
+   
+
+</script>

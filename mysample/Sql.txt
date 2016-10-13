@@ -1,0 +1,121 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Save:
+
+
+
+CREATE PROCEDURE sp_selint (
+
+	@Name VARCHAR(50)
+
+	,@Dob DATETIME
+
+	,@City varchar(50)
+
+	,@Gender NVARCHAR(50)
+
+	,@Rating BIGINT
+
+	,@Status INT
+
+	)
+
+AS
+
+BEGIN
+
+	INSERT INTO selint (
+
+		NAME
+
+		,Dob
+
+		,City
+
+		,Gender
+
+		,Rating
+
+		,STATUS
+
+		)
+
+	VALUES (
+
+		@Name
+
+		,@Dob
+
+		,@City
+
+		,@Gender
+
+		,@Rating
+
+		,@Status
+
+		)
+
+END
+
+
+Update:
+
+
+CREATE PROCEDURE sp_selintupdate (
+	@Upid BIGINT
+	,@Upname VARCHAR(50)
+	,@Updob DATETIME
+	,@Upcity VARCHAR(50)
+	,@Upgender NVARCHAR(50)
+	,@Uprating BIGINT
+	,@Upstatus INT
+	)
+AS
+BEGIN
+	UPDATE selint
+	SET NAME = @Upname
+		,Dob = @Updob
+		,City = @Upcity
+		,Gender = @Upgender
+		,Rating = @Uprating
+		,STATUS = @Upstatus
+	WHERE Id = @Upid
+END
+
+
+Delete:
+
+
+CREATE PROCEDURE sp_selintdelete (@Deleteid BIGINT)
+AS
+BEGIN
+	DELETE
+	FROM selint
+	WHERE (Id = @Deleteid)
+END
+
+
+List-Grid:
+
+
+CREATE PROCEDURE sp_selintgrid (@Searchtext VARCHAR(50) = NULL)
+AS
+BEGIN
+	SELECT *
+	FROM selint
+	WHERE STATUS = '1'
+END
